@@ -1,0 +1,13 @@
+-- 코드를 입력하세요
+SELECT UGU.USER_ID, 
+CONCAT_WS(' ', UGU.city, UGU.street_address1, UGU.street_address2) 전체주소,
+CONCAT_WS('-', 
+              SUBSTR(UGU.TLNO, 1, 3), 
+              SUBSTR(UGU.TLNO, 4, LENGTH(UGU.TLNO) - 7), 
+              SUBSTR(UGU.TLNO, -4, 4)) 전화번호
+FROM USED_GOODS_BOARD UGB
+INNER JOIN USED_GOODS_USER  UGU
+ON UGB.WRITER_ID = UGU.USER_ID
+GROUP BY UGB.WRITER_ID
+HAVING COUNT(*) >=3
+ORDER BY UGB.WRITER_ID DESC ;
